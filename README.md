@@ -1,5 +1,11 @@
 # Sistem Manajemen Turnamen Esports REST API
 
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Serverless%20WSGI-black?logo=vercel)](https://vercel.com)
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://python.org)
+[![Framework](https://img.shields.io/badge/Framework-Flask%203.0-green?logo=flask)](https://flask.palletsprojects.com/)
+[![Database](https://img.shields.io/badge/Database-PostgreSQL%20(Supabase)-336791?logo=postgresql)](https://supabase.com)
+[![Automated Tests](https://img.shields.io/badge/Automated%20Tests-12%20Passed-brightgreen)](test_api.py)
+
 RESTful API backend untuk platform penyelenggaraan dan manajemen turnamen *esports*. Proyek ini dibangun menggunakan **Python Flask** dan **PostgreSQL (Supabase)**, serta siap di-deploy secara serverless ke **Vercel**.
 
 ---
