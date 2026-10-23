@@ -173,6 +173,15 @@ BE-back-end-/
 }
 ```
 
+### Contoh Pengujian Endpoint dengan cURL
+```bash
+# 1. Cek status kesehatan server
+curl -X GET https://YOUR-VERCEL-URL.vercel.app/api/health
+
+# 2. Mengambil daftar turnamen
+curl -X GET https://YOUR-VERCEL-URL.vercel.app/api/tournaments
+```
+
 ---
 
 ## Pengujian Postman
