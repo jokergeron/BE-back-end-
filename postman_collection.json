@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "Esports Tournament Management REST API",
+    "description": "Koleksi Postman untuk pengujian Sistem Manajemen Turnamen Esports",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Root & Health",
+      "item": [
+        {
+          "name": "GET Root Index",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            }
+          }
+        },
+        {
+          "name": "GET Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. Master Data",
+      "item": [
+        {
+          "name": "GET Teams",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "teams"]
+            }
+          }
+        },
+        {
+          "name": "GET Matches",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/matches",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "matches"]
+            }
+          }
+        },
+        {
+          "name": "GET Registrations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/registrations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "registrations"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Tournaments CRUD",
+      "item": [
+        {
+          "name": "GET All Tournaments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tournaments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tournaments"]
+            }
+          }
+        },
+        {
+          "name": "GET Tournament By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tournaments/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tournaments", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST Create Tournament (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dota 2 The International 2026\",\n  \"format\": \"Double Elimination\",\n  \"max_teams\": 16,\n  \"start_date\": \"2026-10-15\",\n  \"user_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tournaments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tournaments"]
+            }
+          }
+        },
+        {
+          "name": "PUT Update Tournament (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"ongoing\",\n  \"max_teams\": 24\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tournaments/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tournaments", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE Tournament (409 Conflict - Has Registered Teams)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tournaments/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tournaments", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
