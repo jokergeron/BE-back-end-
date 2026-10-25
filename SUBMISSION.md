@@ -10,7 +10,7 @@ Yang Dikumpulkan:
 https://github.com/jokergeron/BE-back-end-
 
 2. Link deployment Vercel:
-[Paste Link Vercel di Sini setelah klik Deploy]
+https://be-back-end.vercel.app
 
 3. Dokumentasi API (di README):
 https://github.com/jokergeron/BE-back-end-#readme
