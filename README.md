@@ -655,31 +655,4 @@ OK
 
 ---
 
-## Evaluasi Pemenuhan Tugas: Persyaratan Minimum vs Fitur Nilai Tambah (Rubrik Penilaian)
 
-Bagian ini merangkum pemenuhan terhadap kriteria penilaian resmi tugas akhir backend serta fitur-fitur nilai tambah yang telah diimplementasikan:
-
-### A. Persyaratan Minimum (Sesuai Ketentuan Tugas Resmi)
-
-| No | Komponen Minimum | Ketentuan Rubrik | Implementasi dalam Proyek | Status |
-| :---: | :--- | :--- | :--- | :---: |
-| **1** | **Skema Database** | Minimal 5 tabel berelasi dengan Foreign Key | Mengimplementasikan 5 tabel relasional terpadu: `users`, `teams`, `tournaments`, `registrations`, `matches` dengan Primary Key dan Foreign Key lengkap di `esports_db.sql` | ✅ **Lulus (100%)** |
-| **2** | **Relasi Antar Tabel** | Minimal ada relasi (1:1, 1:N, N:N) | Memuat relasi 1:N (`users` ➔ `tournaments`, `tournaments` ➔ `matches`), N:N (`tournaments` ↔ `teams` via junction table `registrations`), serta relasi kapten tim (`users` ↔ `teams`) | ✅ **Lulus (100%)** |
-| **3** | **Endpoint HTTP Methods** | Menggunakan method `GET`, `POST`, `PUT`, dan `DELETE` | CRUD lengkap pada resource `/api/tournaments` dengan status code `200`, `201`, `400`, `404`, `409` | ✅ **Lulus (100%)** |
-| **4** | **Deployment Live Vercel** | Live di Vercel dan terhubung ke cloud database | Terkonfigurasi untuk serverless Vercel (`vercel.json`, `VercelPathMiddleware`) dan terhubung ke cluster PostgreSQL Supabase | ✅ **Lulus (100%)** |
-| **5** | **Pengujian API** | Bisa diuji lewat Postman / Thunder Client | Seluruh endpoint terstandarisasi REST JSON dan siap diuji melalui Postman / Thunder Client / cURL untuk bukti screenshot pengujian | ✅ **Lulus (100%)** |
-| **6** | **Dokumentasi Lengkap** | Deskripsi, ERD, daftar endpoint, request/response, cara run lokal | Terdokumentasi lengkap pada `README.md` ini beserta diagram ERD Mermaid, spesifikasi parameter, dan instruksi pengetesan | ✅ **Lulus (100%)** |
-| **7** | **Keamanan Kredensial** | Tidak ada password atau secret key di repository | Menggunakan environment variable `DATABASE_URL` via `.env.example`, `.gitignore`, dan timeout defensif `connect_timeout=3` | ✅ **Lulus (100%)** |
-
----
-
-### B. Fitur Nilai Tambah (Beyond Minimum Requirements / Extras)
-
-| No | Fitur Nilai Tambah (Extra) | Deskripsi & Implementasi Teknis | Manfaat / Nilai Tambah |
-| :---: | :--- | :--- | :--- |
-| **1** | **34 Skenario Automated Testing** | Test suite otomatis komprehensif pada `test_api.py` menggunakan Python `unittest` tanpa library pihak ketiga tambahan. | Menjamin kode bebas regresi (*regression-free*), menguji *happy path*, *unhappy path*, *boundary condition*, tipe boolean, empty string, hingga 405 Method Not Allowed. |
-| **2** | **In-Memory Mock Database Fallback & State Isolation** | Modul `api/db.py` dilengkapi mock data mandiri dan fungsi `reset_mock_data()` untuk isolasi state antar-tes. | Aplikasi dan seluruh pengujian otomatis dapat berjalan kilat secara lokal meski jaringan internet ke cloud database terputus. |
-| **3** | **Proteksi Integritas Relasional (HTTP 409 Conflict)** | Endpoint `DELETE /api/tournaments/<id>` memeriksa pendaftaran tim aktif sebelum menghapus, serta menangkap `psycopg2.IntegrityError`. | Menghindari *data corruption* dan mencegah crash error 500 saat foreign key restriction dilanggar. |
-| **4** | **Vercel Serverless Path Middleware** | Class `VercelPathMiddleware` pada WSGI pipeline untuk merekonstruksi `PATH_INFO` dari parameter `__path`. | Mengeliminasi bug `404 Not Found` yang kerap dialami framework WSGI Python saat di-deploy ke Vercel Serverless. |
-| **5** | **Dual Routing Architecture** | Decorator `@register_route` mendaftarkan rute dengan prefiks `/api/<endpoint>` dan rute langsung `/<endpoint>`. | Memberikan fleksibilitas akses URL untuk evaluator dan integrasi frontend tanpa kekhawatiran typo rute. |
-| **6** | **CORS Global & OPTIONS Preflight** | Hook `@app.after_request` dan handler `@app.before_request` menyematkan header CORS lengkap (`Access-Control-Allow-*`). | Siap diintegrasikan langsung dengan aplikasi frontend (React, Vue, mobile) dari origin manapun tanpa CORS error. |
