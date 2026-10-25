@@ -5,11 +5,10 @@
 [![Framework](https://img.shields.io/badge/Framework-Flask%203.0-green?logo=flask)](https://flask.palletsprojects.com/)
 [![Database](https://img.shields.io/badge/Database-PostgreSQL%20(Supabase)-336791?logo=postgresql)](https://supabase.com)
 [![Automated Tests](https://img.shields.io/badge/Automated%20Tests-34%20Passed-brightgreen)](test_api.py)
-[![Postman Collection](https://img.shields.io/badge/Postman-v2.1%20Ready-FF6C37?logo=postman)](postman_collection.json)
 
 Backend RESTful API untuk platform penyelenggaraan dan manajemen turnamen *esports*. Dibangun menggunakan **Python Flask** dan **PostgreSQL (Supabase)**, dengan dukungan deployment serverless WSGI pada platform **Vercel**. 
 
-API ini mendukung operasi CRUD lengkap untuk data turnamen, filter status dan pencarian parsial, proteksi integritas relasional data pendaftaran tim, master data tim dan kapten, jadwal dan skor pertandingan, serta riwayat registrasi. Seluruh fungsi telah divalidasi dengan 34 skenario automated testing dan koleksi Postman yang memuat saved example response untuk seluruh status code (200, 201, 400, 404, 409).
+API ini mendukung operasi CRUD lengkap untuk data turnamen, filter status dan pencarian parsial, proteksi integritas relasional data pendaftaran tim, master data tim dan kapten, jadwal dan skor pertandingan, serta riwayat registrasi. Seluruh fungsi telah divalidasi dengan 34 skenario automated testing untuk seluruh status code (200, 201, 400, 404, 409).
 
 ---
 
@@ -107,7 +106,6 @@ BE-back-end-/
 ├── .gitignore                # File yang diabaikan oleh Git
 ├── app.py                    # Runner lokal (python app.py)
 ├── esports_db.sql            # Skema DDL tabel database (idempoten: CREATE TABLE IF NOT EXISTS)
-├── postman_collection.json   # Koleksi Postman v2.1 dengan skrip pm.test & saved examples (200, 201, 400, 404, 409)
 ├── README.md                 # Dokumentasi teknis proyek lengkap
 ├── requirements.txt          # Dependensi pustaka Python
 ├── seed.sql                  # Data awal dummy & sinkronisasi sequence auto-increment
@@ -623,18 +621,15 @@ Menghapus data turnamen. API memiliki proteksi keamanan relasional: jika terdapa
 
 ---
 
-## Pengujian Postman
+## Pengujian API (Postman / Thunder Client)
 
-File koleksi `postman_collection.json` berstandar Postman Collection Schema v2.1 telah disertakan di root repositori:
+Pengujian REST API dapat dilakukan secara langsung menggunakan aplikasi **Postman**, ekstensi VS Code **Thunder Client**, atau perintah `curl`:
 
-1. Buka aplikasi **Postman** (atau ekstensi VS Code *Thunder Client* / *Postman*).
-2. Klik tombol **Import**, lalu pilih file `postman_collection.json`.
-3. Variabel `{{baseUrl}}` otomatis mengarah ke `http://127.0.0.1:5000` untuk pengetesan lokal.
-   *(Saat menguji deployment Vercel, ubah nilai `baseUrl` menjadi URL Vercel Anda).*
-4. Setiap request dalam koleksi telah dilengkapi dengan:
-   - **Saved Example Responses** yang memuat respons nyata untuk status code `200`, `201`, `400`, `404`, dan `409`.
-   - **Postman Test Scripts (`pm.test`)** untuk pengujian otomatis assertion status code, properti JSON, dan pesan validasi.
-5. Jalankan seluruh pengujian sekaligus menggunakan fitur **Run collection** pada Postman. Seluruh pengujian akan lolos 100% (All Passed).
+1. Buka aplikasi **Postman** atau **Thunder Client**.
+2. Masukkan endpoint URL yang ingin diuji menggunakan URL deployment Vercel Anda (misal `https://be-back-end.vercel.app/api/tournaments`) atau URL server lokal `http://127.0.0.1:5000`.
+3. Pilih HTTP Method yang sesuai (`GET`, `POST`, `PUT`, atau `DELETE`) dan sertakan Request Body JSON jika melakukan `POST` atau `PUT` sesuai format spesifikasi di atas.
+4. Klik **Send** dan periksa balasan status HTTP (`200 OK`, `201 Created`, `400 Bad Request`, `404 Not Found`, atau `409 Conflict`).
+5. Ambil tangkapan layar (*screenshot*) pada hasil respon yang sukses maupun respon error sebagai bukti pengujian tugas akhir Anda.
 
 ---
 
@@ -704,7 +699,7 @@ Bagian ini merangkum pemenuhan terhadap kriteria penilaian resmi tugas akhir bac
 | **2** | **Relasi Antar Tabel** | Minimal ada relasi (1:1, 1:N, N:N) | Memuat relasi 1:N (`users` ➔ `tournaments`, `tournaments` ➔ `matches`), N:N (`tournaments` ↔ `teams` via junction table `registrations`), serta relasi kapten tim (`users` ↔ `teams`) | ✅ **Lulus (100%)** |
 | **3** | **Endpoint HTTP Methods** | Menggunakan method `GET`, `POST`, `PUT`, dan `DELETE` | CRUD lengkap pada resource `/api/tournaments` dengan status code `200`, `201`, `400`, `404`, `409` | ✅ **Lulus (100%)** |
 | **4** | **Deployment Live Vercel** | Live di Vercel dan terhubung ke cloud database | Terkonfigurasi untuk serverless Vercel (`vercel.json`, `VercelPathMiddleware`) dan terhubung ke cluster PostgreSQL Supabase | ✅ **Lulus (100%)** |
-| **5** | **Pengujian API** | Bisa diuji lewat Postman / Thunder Client | Menyediakan file koleksi `postman_collection.json` v2.1 siap impor dengan 18 request, assertion tests (`pm.test`), dan saved response examples (200, 201, 400, 404, 409) | ✅ **Lulus (100%)** |
+| **5** | **Pengujian API** | Bisa diuji lewat Postman / Thunder Client | Seluruh endpoint terstandarisasi REST JSON dan siap diuji melalui Postman / Thunder Client / cURL untuk bukti screenshot pengujian | ✅ **Lulus (100%)** |
 | **6** | **Dokumentasi Lengkap** | Deskripsi, ERD, daftar endpoint, request/response, cara run lokal | Terdokumentasi lengkap pada `README.md` ini beserta diagram ERD Mermaid, spesifikasi parameter, dan instruksi pengetesan | ✅ **Lulus (100%)** |
 | **7** | **Keamanan Kredensial** | Tidak ada password atau secret key di repository | Menggunakan environment variable `DATABASE_URL` via `.env.example`, `.gitignore`, dan timeout defensif `connect_timeout=3` | ✅ **Lulus (100%)** |
 
