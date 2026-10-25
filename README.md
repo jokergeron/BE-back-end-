@@ -576,6 +576,30 @@ Pengujian REST API dapat dilakukan secara langsung menggunakan aplikasi **Postma
 5. Ambil tangkapan layar (*screenshot*) pada hasil respon yang sukses maupun respon error sebagai bukti pengujian tugas akhir Anda.
 
 ---
+Pengujian GET /
+<img width="1590" height="993" alt="Screenshot 2026-10-25 201225" src="https://github.com/user-attachments/assets/89e43d79-3f69-4352-b2da-9122e128bf09" />
+Pengujian
+Pengujian GET /Health
+<img width="1572" height="1017" alt="Screenshot 2026-10-25 201330" src="https://github.com/user-attachments/assets/a5d20d5a-d817-4512-9056-88a851e99e66" />
+Pengujian GET /teams
+<img width="1612" height="1037" alt="Screenshot 2026-10-25 201648" src="https://github.com/user-attachments/assets/faf27ad0-5ad2-4785-94b2-9c6e835bcb24" />
+Pengujian GET /matches
+<img width="1568" height="981" alt="Screenshot 2026-10-25 201746" src="https://github.com/user-attachments/assets/f3a29337-7324-426f-b571-02897e226630" />
+Pengujian GET /registration
+<img width="1568" height="981" alt="Screenshot 2026-10-25 201746" src="https://github.com/user-attachments/assets/a9420f67-704e-4c25-a6b4-e49459358588" />
+Pengujian GET /tournaments,GET /tournaments/1 dan eror
+<img width="1596" height="1040" alt="Screenshot 2026-10-25 201935" src="https://github.com/user-attachments/assets/dcff2225-5224-431d-b8de-3c9a2201cc3e" />
+<img width="1603" height="1030" alt="Screenshot 2026-10-25 202200" src="https://github.com/user-attachments/assets/7f8dd51a-af84-4ad9-974e-243a5cafad7c" />
+<img width="1595" height="851" alt="Screenshot 2026-10-25 202217" src="https://github.com/user-attachments/assets/e7b6d621-1fc8-4bbd-a2eb-1ce48fbad96b" />
+Pengujian POST /tournaments dan eror nya
+<img width="1563" height="1036" alt="Screenshot 2026-10-25 202455" src="https://github.com/user-attachments/assets/7b40de35-e106-4e44-a62d-86e259095549" />
+<img width="1590" height="991" alt="Screenshot 2026-10-25 202713" src="https://github.com/user-attachments/assets/def04af8-bd25-49e2-851b-8aa7cc2153ad" />
+Pengujian PUT /tournaments dan eror nya
+<img width="1615" height="1037" alt="Screenshot 2026-10-25 202948" src="https://github.com/user-attachments/assets/1715a4ba-f482-4ce0-832b-bc0f5ca92e57" />
+<img width="1552" height="1031" alt="Screenshot 2026-10-25 203052" src="https://github.com/user-attachments/assets/f49dc676-5690-4a9a-a6f1-31318b091f34" />
+Pengujian DELETE
+<img width="1602" height="1038" alt="Screenshot 2026-10-25 203138" src="https://github.com/user-attachments/assets/650bba71-d4f7-4246-9dd1-2e9f9ca6a508" />
+<img width="1646" height="1077" alt="Screenshot 2026-10-25 203201" src="https://github.com/user-attachments/assets/9a040ae6-0af9-40a2-9e24-42f8e3f9cae9" />
 
 ## Pengujian Otomatis (Automated Tests)
 
