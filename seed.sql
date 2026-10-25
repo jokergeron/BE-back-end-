@@ -47,3 +47,4 @@ SELECT setval(pg_get_serial_sequence('teams', 'id'), COALESCE((SELECT MAX(id) FR
 SELECT setval(pg_get_serial_sequence('tournaments', 'id'), COALESCE((SELECT MAX(id) FROM tournaments), 1));
 SELECT setval(pg_get_serial_sequence('registrations', 'id'), COALESCE((SELECT MAX(id) FROM registrations), 1));
 SELECT setval(pg_get_serial_sequence('matches', 'id'), COALESCE((SELECT MAX(id) FROM matches), 1));
+
