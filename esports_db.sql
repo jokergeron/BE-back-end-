@@ -63,3 +63,4 @@ CREATE TABLE IF NOT EXISTS matches (
     CONSTRAINT fk_matches_team_b FOREIGN KEY (team_b_id) REFERENCES teams(id) ON DELETE CASCADE,
     CONSTRAINT fk_matches_winner FOREIGN KEY (winner_team_id) REFERENCES teams(id) ON DELETE SET NULL
 );
+
