@@ -145,3 +145,4 @@ def get_db_connection():
     except Exception as e:
         print(f"[DB Warning] Gagal terhubung ke database: {e}. Menggunakan in-memory fallback.")
         return None
+
