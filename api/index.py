@@ -476,3 +476,4 @@ def method_not_allowed(e):
 @app.errorhandler(500)
 def server_error(e):
     return jsonify({"status": "error", "message": "Internal Server Error (500)"}), 500
+    
