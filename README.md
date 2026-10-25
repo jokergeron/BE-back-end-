@@ -109,7 +109,6 @@ BE-back-end-/
 ├── README.md                 # Dokumentasi teknis proyek lengkap
 ├── requirements.txt          # Dependensi pustaka Python
 ├── seed.sql                  # Data awal dummy & sinkronisasi sequence auto-increment
-├── SUBMISSION.md             # Format teks pengumpulan tugas
 ├── test_api.py               # Automated unit & integration tests (34 skenario)
 └── vercel.json               # Konfigurasi routing serverless Vercel
 ```
