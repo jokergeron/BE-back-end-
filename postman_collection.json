@@ -11,6 +11,12 @@
       "value": "http://127.0.0.1:5000",
       "type": "string",
       "description": "Base URL REST API (sesuaikan dengan URL deployment Vercel saat diuji online)"
+    },
+    {
+      "key": "createdTournamentId",
+      "value": "4",
+      "type": "string",
+      "description": "ID turnamen untuk pengujian penghapusan (default 4)"
     }
   ],
   "item": [
@@ -48,8 +54,12 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/",
-              "host": ["{{baseUrl}}"],
-              "path": [""]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ]
             },
             "description": "Mengambil ringkasan metadata API, versi layanan, dan daftar katalog endpoint rute yang tersedia."
           },
@@ -66,8 +76,12 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/",
-                  "host": ["{{baseUrl}}"],
-                  "path": [""]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
                 }
               },
               "status": "OK",
@@ -114,8 +128,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/health",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "health"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
             },
             "description": "Memeriksa status operasional server backend dan status konektivitas ke database PostgreSQL Supabase."
           },
@@ -132,8 +151,13 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/health",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "health"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "health"
+                  ]
                 }
               },
               "status": "OK",
@@ -186,8 +210,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/teams",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "teams"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams"
+              ]
             },
             "description": "Mengambil seluruh data tim esports terdaftar beserta informasi kapten masing-masing."
           },
@@ -204,8 +233,13 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/teams",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "teams"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams"
+                  ]
                 }
               },
               "status": "OK",
@@ -253,8 +287,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/matches",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "matches"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "matches"
+              ]
             },
             "description": "Mengambil jadwal dan riwayat pertandingan antar-tim esports beserta skor dan pemenang."
           },
@@ -271,8 +310,13 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/matches",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "matches"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "matches"
+                  ]
                 }
               },
               "status": "OK",
@@ -320,8 +364,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/registrations",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "registrations"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registrations"
+              ]
             },
             "description": "Mengambil riwayat pendaftaran tim esports pada masing-masing turnamen beserta status verifikasi pendaftarannya."
           },
@@ -338,8 +387,13 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/registrations",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "registrations"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "registrations"
+                  ]
                 }
               },
               "status": "OK",
@@ -392,8 +446,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tournaments",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments"
+              ]
             },
             "description": "Mengambil seluruh data turnamen tanpa filter."
           },
@@ -410,8 +469,13 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments"
+                  ]
                 }
               },
               "status": "OK",
@@ -460,8 +524,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tournaments?status=open",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments"
+              ],
               "query": [
                 {
                   "key": "status",
@@ -485,8 +554,13 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments?status=open",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments"],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments"
+                  ],
                   "query": [
                     {
                       "key": "status",
@@ -541,8 +615,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tournaments?search=valorant",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments"
+              ],
               "query": [
                 {
                   "key": "search",
@@ -566,8 +645,13 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments?search=valorant",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments"],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments"
+                  ],
                   "query": [
                     {
                       "key": "search",
@@ -621,8 +705,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tournaments/1",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments", "1"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments",
+                "1"
+              ]
             },
             "description": "Mengambil rincian detail turnamen beserta relasi daftar tim yang telah mendaftar ke turnamen tersebut."
           },
@@ -639,8 +729,14 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments/1",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments", "1"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments",
+                    "1"
+                  ]
                 }
               },
               "status": "OK",
@@ -687,8 +783,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tournaments/9999",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments", "9999"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments",
+                "9999"
+              ]
             },
             "description": "Pengujian pengambilan turnamen dengan ID yang tidak ada di sistem untuk memastikan penanganan status 404 Not Found."
           },
@@ -705,8 +807,14 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments/9999",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments", "9999"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments",
+                    "9999"
+                  ]
                 }
               },
               "status": "Not Found",
@@ -738,7 +846,10 @@
                   "    pm.expect(json.status).to.eql(\"success\");",
                   "    pm.expect(json.data.name).to.eql(\"Dota 2 The International 2026\");",
                   "    pm.expect(json.data.id).to.be.above(0);",
-                  "});"
+                  "});",
+                  "if (json.data && json.data.id) {",
+                  "    pm.collectionVariables.set(\"createdTournamentId\", String(json.data.id));",
+                  "}"
                 ],
                 "type": "text/javascript"
               }
@@ -762,8 +873,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/tournaments",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments"
+              ]
             },
             "description": "Membuat entri data turnamen esports baru ke database sistem."
           },
@@ -788,8 +904,13 @@
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments"
+                  ]
                 }
               },
               "status": "Created",
@@ -844,8 +965,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/tournaments",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments"
+              ]
             },
             "description": "Pengujian validasi payload tanpa field 'name' yang wajib, mengembalikan status 400 Bad Request."
           },
@@ -870,8 +996,13 @@
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -926,8 +1057,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/tournaments",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments"
+              ]
             },
             "description": "Pengujian validasi nilai integer kapasitas tim yang bernilai non-positif atau tidak valid."
           },
@@ -952,8 +1088,13 @@
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -1009,8 +1150,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/tournaments/1",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments", "1"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments",
+                "1"
+              ]
             },
             "description": "Memperbarui atribut status pelaksanaan turnamen atau kapasitas maksimal tim peserta."
           },
@@ -1035,8 +1182,14 @@
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments/1",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments", "1"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments",
+                    "1"
+                  ]
                 }
               },
               "status": "OK",
@@ -1091,8 +1244,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/tournaments/9999",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments", "9999"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments",
+                "9999"
+              ]
             },
             "description": "Pengujian update data turnamen pada ID yang tidak terdaftar, menghasilkan respons 404 Not Found."
           },
@@ -1117,8 +1276,14 @@
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments/9999",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments", "9999"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments",
+                    "9999"
+                  ]
                 }
               },
               "status": "Not Found",
@@ -1165,8 +1330,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tournaments/1",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments", "1"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments",
+                "1"
+              ]
             },
             "description": "Mencoba menghapus turnamen yang masih memiliki data pendaftaran tim aktif. Sistem menolak penghapusan dengan kode 409 Conflict untuk menjaga integritas relasional basis data."
           },
@@ -1183,8 +1354,14 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments/1",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments", "1"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments",
+                    "1"
+                  ]
                 }
               },
               "status": "Conflict",
@@ -1231,8 +1408,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tournaments/9999",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments", "9999"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments",
+                "9999"
+              ]
             },
             "description": "Pengujian penghapusan turnamen dengan ID fiktif untuk memastikan respons 404 Not Found."
           },
@@ -1249,8 +1432,14 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments/9999",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments", "9999"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments",
+                    "9999"
+                  ]
                 }
               },
               "status": "Not Found",
@@ -1296,9 +1485,15 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/api/tournaments/4",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tournaments", "4"]
+              "raw": "{{baseUrl}}/api/tournaments/{{createdTournamentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tournaments",
+                "{{createdTournamentId}}"
+              ]
             },
             "description": "Menghapus turnamen yang tidak memiliki pendaftaran tim aktif (misalnya turnamen baru hasil POST), sehingga berhasil dengan status 200 OK."
           },
@@ -1315,8 +1510,14 @@
                 ],
                 "url": {
                   "raw": "{{baseUrl}}/api/tournaments/4",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "tournaments", "4"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tournaments",
+                    "4"
+                  ]
                 }
               },
               "status": "OK",

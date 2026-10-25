@@ -1,9 +1,11 @@
 import urllib.parse
 from flask import Flask, jsonify, request, make_response
 
+import psycopg2
 try:
     from api.db import (
         get_db_connection,
+        reset_mock_data,
         MOCK_TOURNAMENTS,
         MOCK_TEAMS,
         MOCK_USERS,
@@ -13,6 +15,7 @@ try:
 except ImportError:
     from db import (
         get_db_connection,
+        reset_mock_data,
         MOCK_TOURNAMENTS,
         MOCK_TEAMS,
         MOCK_USERS,
@@ -208,7 +211,7 @@ def get_tournament_detail(tour_id):
 
 @register_route('/api/tournaments', methods=['POST'])
 def create_tournament():
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if not data or not isinstance(data, dict):
         return jsonify({"status": "error", "message": "Request body harus berupa JSON object"}), 400
 
@@ -220,7 +223,7 @@ def create_tournament():
 
     if not name:
         return jsonify({"status": "error", "message": "Field 'name' turnamen wajib diisi"}), 400
-    if not isinstance(max_teams, int) or max_teams <= 0:
+    if isinstance(max_teams, bool) or not isinstance(max_teams, int) or max_teams <= 0:
         return jsonify({"status": "error", "message": "Field 'max_teams' harus berupa integer positif"}), 400
 
     conn = get_db_connection()
@@ -269,13 +272,18 @@ def create_tournament():
 
 @register_route('/api/tournaments/<int:tour_id>', methods=['PUT'])
 def update_tournament(tour_id):
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if not data or not isinstance(data, dict):
         return jsonify({"status": "error", "message": "Request body harus berupa JSON object"}), 400
 
+    if 'name' in data:
+        name_val = str(data['name']).strip()
+        if not name_val:
+            return jsonify({"status": "error", "message": "Field 'name' tidak boleh kosong"}), 400
+
     if 'max_teams' in data:
         max_teams_val = data['max_teams']
-        if not isinstance(max_teams_val, int) or max_teams_val <= 0:
+        if isinstance(max_teams_val, bool) or not isinstance(max_teams_val, int) or max_teams_val <= 0:
             return jsonify({"status": "error", "message": "Field 'max_teams' harus berupa integer positif"}), 400
 
     conn = get_db_connection()
@@ -289,10 +297,10 @@ def update_tournament(tour_id):
                 conn.close()
                 return jsonify({"status": "error", "message": f"Turnamen dengan ID {tour_id} tidak ditemukan"}), 404
 
-            name = data.get('name', existing['name'])
-            fmt = data.get('format', existing['format'])
+            name = str(data['name']).strip() if 'name' in data else existing['name']
+            fmt = str(data['format']).strip() if 'format' in data else existing['format']
             max_teams = data.get('max_teams', existing['max_teams'])
-            status = data.get('status', existing['status'])
+            status = str(data['status']).strip() if 'status' in data else existing['status']
 
             cur.execute("""
                 UPDATE tournaments
@@ -319,11 +327,11 @@ def update_tournament(tour_id):
     if not tour:
         return jsonify({"status": "error", "message": f"Turnamen dengan ID {tour_id} tidak ditemukan"}), 404
 
-    if 'name' in data and data['name']:
+    if 'name' in data:
         tour['name'] = str(data['name']).strip()
     if 'format' in data and data['format']:
         tour['format'] = str(data['format']).strip()
-    if 'max_teams' in data and isinstance(data['max_teams'], int):
+    if 'max_teams' in data and isinstance(data['max_teams'], int) and not isinstance(data['max_teams'], bool):
         tour['max_teams'] = data['max_teams']
     if 'status' in data and data['status']:
         tour['status'] = str(data['status']).strip()
@@ -365,8 +373,15 @@ def delete_tournament(tour_id):
             conn.close()
             return jsonify({
                 "status": "success",
-                "message": f"Turnamen ID {tour_id} berhasil dihapus"
+                "message": f"Turnamen '{existing['name']}' berhasil dihapus"
             }), 200
+        except psycopg2.IntegrityError:
+            conn.rollback()
+            conn.close()
+            return jsonify({
+                "status": "error",
+                "message": f"Tidak dapat menghapus turnamen ID {tour_id} karena terdapat keterkaitan relasional aktif (Relational Integrity Conflict)."
+            }), 409
         except Exception as e:
             conn.rollback()
             conn.close()
@@ -446,6 +461,10 @@ def get_registrations():
 
 
 # Error Handlers
+@app.errorhandler(400)
+def bad_request(e):
+    return jsonify({"status": "error", "message": "Request body tidak valid atau format JSON salah (400)"}), 400
+
 @app.errorhandler(404)
 def not_found(e):
     return jsonify({"status": "error", "message": "Endpoint tidak ditemukan (404)"}), 404

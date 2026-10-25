@@ -25,7 +25,8 @@ ON CONFLICT (id) DO NOTHING;
 INSERT INTO tournaments (id, user_id, name, format, max_teams, start_date, status) VALUES
 (1, 1, 'Valorant Champions 2026', 'Double Elimination', 16, '2026-11-01', 'open'),
 (2, 1, 'MPL Indonesia Season 18', 'Round Robin', 8, '2026-11-15', 'open'),
-(3, 1, 'League of Legends Worlds 2026', 'Swiss Stage', 16, '2026-12-01', 'open')
+(3, 1, 'League of Legends Worlds 2026', 'Swiss Stage', 16, '2026-12-01', 'open'),
+(4, 1, 'Community Shield Cup 2026', 'Single Elimination', 8, '2026-12-20', 'open')
 ON CONFLICT (id) DO NOTHING;
 
 -- 4. Insert Registrations
