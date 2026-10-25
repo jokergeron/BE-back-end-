@@ -1,5 +1,8 @@
+-- =====================================================
 -- Seed Data untuk Sistem Manajemen Turnamen Esports
 -- Jalankan file ini di SQL Editor Supabase setelah esports_db.sql
+-- Idempoten: Aman dieksekusi berulang kali (ON CONFLICT DO NOTHING)
+-- =====================================================
 
 -- 1. Insert Users (Organizer & Kapten Tim)
 INSERT INTO users (id, username, email, password) VALUES
@@ -36,3 +39,10 @@ ON CONFLICT (id) DO NOTHING;
 INSERT INTO matches (id, tournament_id, team_a_id, team_b_id, winner_team_id, round, score_team_a, score_team_b, match_date) VALUES
 (1, 1, 2, 3, 3, 1, 1, 2, '2026-11-02 18:00:00')
 ON CONFLICT (id) DO NOTHING;
+
+-- 6. Sinkronisasi sequence SERIAL PostgreSQL agar INSERT data baru selanjutnya tidak terjadi tabrakan primary key
+SELECT setval(pg_get_serial_sequence('users', 'id'), COALESCE((SELECT MAX(id) FROM users), 1));
+SELECT setval(pg_get_serial_sequence('teams', 'id'), COALESCE((SELECT MAX(id) FROM teams), 1));
+SELECT setval(pg_get_serial_sequence('tournaments', 'id'), COALESCE((SELECT MAX(id) FROM tournaments), 1));
+SELECT setval(pg_get_serial_sequence('registrations', 'id'), COALESCE((SELECT MAX(id) FROM registrations), 1));
+SELECT setval(pg_get_serial_sequence('matches', 'id'), COALESCE((SELECT MAX(id) FROM matches), 1));

@@ -3,7 +3,7 @@ Nama: [Isi Nama Lengkap]
 GitHub: https://github.com/jokergeron
 
 Penjelasan Singkat Proyek:
-Proyek ini adalah RESTful API untuk Sistem Manajemen Turnamen Esports. Dibangun menggunakan Python Flask dan database PostgreSQL (Supabase) yang di-deploy secara serverless ke Vercel. API ini mendukung operasi CRUD lengkap untuk data turnamen, filter status dan pencarian, proteksi integritas relasional terhadap data pendaftaran tim, serta endpoint data tim, pertandingan, dan registrasi. Seluruh fungsi telah diuji dengan 12 skenario automated testing dan koleksi Postman.
+Proyek ini adalah RESTful API untuk Sistem Manajemen Turnamen Esports. Dibangun menggunakan Python Flask dan database PostgreSQL (Supabase) yang di-deploy secara serverless ke Vercel. API ini mendukung operasi CRUD lengkap untuk data turnamen, filter status dan pencarian, proteksi integritas relasional terhadap data pendaftaran tim, serta endpoint data tim, pertandingan, dan registrasi. Seluruh fungsi telah diuji dengan 22 skenario automated testing dan koleksi Postman.
 
 Yang Dikumpulkan:
 1. Link repository (GitHub):

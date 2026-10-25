@@ -1,5 +1,5 @@
 import urllib.parse
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 
 try:
     from api.db import (
@@ -39,6 +39,22 @@ class VercelPathMiddleware:
 
 app.wsgi_app = VercelPathMiddleware(app.wsgi_app)
 
+@app.before_request
+def handle_preflight():
+    if request.method == 'OPTIONS':
+        res = make_response('', 204)
+        res.headers['Access-Control-Allow-Origin'] = '*'
+        res.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+        res.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, Accept'
+        return res
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, Accept'
+    return response
+
 def register_route(rule, **options):
     def decorator(f):
         app.route(rule, **options)(f)
@@ -57,6 +73,8 @@ def register_route(rule, **options):
 def root():
     return jsonify({
         "status": "success",
+        "service": "Esports Tournament Management REST API",
+        "version": "1.0.0",
         "message": "Sistem Manajemen Turnamen Esports REST API siap digunakan",
         "endpoints": {
             "health": "/api/health",
@@ -232,6 +250,7 @@ def create_tournament():
     new_id = max([t['id'] for t in MOCK_TOURNAMENTS], default=0) + 1
     new_tour = {
         "id": new_id,
+        "user_id": user_id,
         "name": name,
         "format": fmt,
         "max_teams": max_teams,
@@ -253,6 +272,11 @@ def update_tournament(tour_id):
     data = request.get_json()
     if not data or not isinstance(data, dict):
         return jsonify({"status": "error", "message": "Request body harus berupa JSON object"}), 400
+
+    if 'max_teams' in data:
+        max_teams_val = data['max_teams']
+        if not isinstance(max_teams_val, int) or max_teams_val <= 0:
+            return jsonify({"status": "error", "message": "Field 'max_teams' harus berupa integer positif"}), 400
 
     conn = get_db_connection()
     if conn:
@@ -370,10 +394,54 @@ def delete_tournament(tour_id):
 # --- 4. Matches & Registrations ---
 @register_route('/api/matches')
 def get_matches():
+    conn = get_db_connection()
+    if conn:
+        try:
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT m.id, m.tournament_id, tr.name AS tournament_name, m.round,
+                       m.team_a_id, ta.name AS team_a_name,
+                       m.team_b_id, tb.name AS team_b_name,
+                       m.score_team_a, m.score_team_b,
+                       m.winner_team_id, tw.name AS winner_name,
+                       m.match_date
+                FROM matches m
+                JOIN tournaments tr ON m.tournament_id = tr.id
+                JOIN teams ta ON m.team_a_id = ta.id
+                JOIN teams tb ON m.team_b_id = tb.id
+                LEFT JOIN teams tw ON m.winner_team_id = tw.id
+                ORDER BY m.id ASC;
+            """)
+            matches = cur.fetchall()
+            cur.close()
+            conn.close()
+            return jsonify({"status": "success", "total": len(matches), "data": matches}), 200
+        except Exception:
+            conn.close()
+
     return jsonify({"status": "success", "total": len(MOCK_MATCHES), "data": MOCK_MATCHES}), 200
 
 @register_route('/api/registrations')
 def get_registrations():
+    conn = get_db_connection()
+    if conn:
+        try:
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT r.id, r.tournament_id, tr.name AS tournament_name,
+                       r.team_id, tm.name AS team_name, r.status, r.registered_at
+                FROM registrations r
+                JOIN tournaments tr ON r.tournament_id = tr.id
+                JOIN teams tm ON r.team_id = tm.id
+                ORDER BY r.id ASC;
+            """)
+            regs = cur.fetchall()
+            cur.close()
+            conn.close()
+            return jsonify({"status": "success", "total": len(regs), "data": regs}), 200
+        except Exception:
+            conn.close()
+
     return jsonify({"status": "success", "total": len(MOCK_REGISTRATIONS), "data": MOCK_REGISTRATIONS}), 200
 
 
