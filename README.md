@@ -36,64 +36,9 @@ API ini mendukung operasi CRUD lengkap untuk data turnamen, filter status dan pe
 
 Skema relasional 5 tabel utama yang didefinisikan pada `esports_db.sql`:
 
-```mermaid
-erDiagram
-    USERS ||--o{ TEAMS : "captains"
-    USERS ||--o{ TOURNAMENTS : "organizes"
-    
-    TOURNAMENTS ||--o{ REGISTRATIONS : "receives"
-    TEAMS ||--o{ REGISTRATIONS : "registers"
-    
-    TOURNAMENTS ||--o{ MATCHES : "holds"
-    TEAMS ||--o{ MATCHES : "plays_in"
 
-    USERS {
-        int id PK
-        string username UK
-        string email UK
-        string password
-        timestamp created_at
-    }
+<img width="1938" height="979" alt="drawSQL-image-export-2026-10-23" src="https://github.com/user-attachments/assets/89201955-aad9-4cad-8d70-8d2b5a884cb4" />
 
-    TEAMS {
-        int id PK
-        string name
-        int captain_id FK
-        timestamp created_at
-    }
-
-    TOURNAMENTS {
-        int id PK
-        int user_id FK
-        string name
-        string format
-        int max_teams
-        date start_date
-        string status
-    }
-
-    REGISTRATIONS {
-        int id PK
-        int tournament_id FK
-        int team_id FK
-        timestamp registered_at
-        string status
-    }
-
-    MATCHES {
-        int id PK
-        int tournament_id FK
-        int team_a_id FK
-        int team_b_id FK
-        int winner_team_id FK
-        int round
-        int score_team_a
-        int score_team_b
-        timestamp match_date
-    }
-```
-
----
 
 ## Struktur Direktori Proyek
 
